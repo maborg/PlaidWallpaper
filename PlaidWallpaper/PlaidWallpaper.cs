@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 
 namespace it.to.maborg
@@ -22,17 +23,30 @@ namespace it.to.maborg
         _palette.DownloadPaletteAsync(r, 0xa3000000),
         _palette.DownloadPaletteAsync(r, 0xa4000000),
         _palette.DownloadPaletteAsync(r, 0xa5000000),
-        _palette.DownloadPaletteAsync(r, 0xa6000000)
-      
+        _palette.DownloadPaletteAsync(r, 0xa6000000),
+        _palette.DownloadPaletteAsync(r, 0xaB000000), 
+        _palette.DownloadPaletteAsync(r, 0xaA000000),
+        _palette.DownloadPaletteAsync(r, 0xa3000000),
+        _palette.DownloadPaletteAsync(r, 0xa1000000),
+        _palette.DownloadPaletteAsync(r, 0xa2000000),
+        _palette.DownloadPaletteAsync(r, 0xa3000000),
+        _palette.DownloadPaletteAsync(r, 0xa4000000),
+        _palette.DownloadPaletteAsync(r, 0xa5000000),
+        _palette.DownloadPaletteAsync(r, 0xa6000000),      
       };
 
-      var ImgByteList = palette
-        .Select(async (p) => PlaidGrid.CreateGridImage(new PlaidGrid.GridInfo()
-        { MaxXCells = 5,
-          MaxYCells = 5,
-          BoxSize = r.Next(1, 30) + r.Next(1, 30),
-          VerticalLine = true,
-          Palette = (await p).ToArray()})).ToList();
+    
+
+      var ImgByteList = palette.Select(async (p,index) => 
+        PlaidGrid.CreateGridImage(
+          new PlaidGrid.GridInfo()
+            { MaxXCells = 5*16,
+              MaxYCells = 5*9,
+              BoxSize = r.Next(20, 30),
+              VerticalLine = true,
+              OrizzontalLine =index % 2 == 1 ,
+              Palette = (await p).ToArray()
+            })).ToList();
 
       int i = 0;
 

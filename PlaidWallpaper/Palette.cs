@@ -13,7 +13,7 @@ namespace it.to.maborg
   {
     public async Task<IEnumerable<Color>> DownloadPaletteAsync(Random r, uint alpha)
     {
-      var url = String.Format("http://www.colourlovers.com/api/palettes?resultOffset={0}&numResults=1&orderCol=numVote&sortBy=DESC", r.Next(0, 200));
+      var url = String.Format("http://www.colourlovers.com/api/palettes?resultOffset={0}&numResults=1&orderCol=numVote&sortBy=DESC", r.Next(0, 100));
 
       Task<string> xmlString = new WebClient().DownloadStringTaskAsync(url);
 
