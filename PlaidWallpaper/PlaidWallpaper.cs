@@ -16,22 +16,11 @@ namespace it.to.maborg
       var palette = new[]
       {
         _palette.DownloadPaletteAsync(r, 0xAA000000),
-        _palette.DownloadPaletteAsync(r, 0xFF000000),
-        _palette.DownloadPaletteAsync(r, 0xBB000000),
-        _palette.DownloadPaletteAsync(r, 0xFF000000),
-        _palette.DownloadPaletteAsync(r, 0xBB000000),
-        _palette.DownloadPaletteAsync(r, 0xBB000000),
-        _palette.DownloadPaletteAsync(r, 0xBB000000),
-        _palette.DownloadPaletteAsync(r, 0xBB000000),
-        _palette.DownloadPaletteAsync(r, 0xBB000000),
-        _palette.DownloadPaletteAsync(r, 0xBB000000),
-        _palette.DownloadPaletteAsync(r, 0xBB000000),
-        _palette.DownloadPaletteAsync(r, 0xBB000000),
-        _palette.DownloadPaletteAsync(r, 0xBB000000),
+
       };
 
       int j = 0;
-      int numloops = 5;
+      int numloops = 3;
 
       do
       {
@@ -40,9 +29,9 @@ namespace it.to.maborg
                                                                 {
                                                                   MaxXCells = r.Next(3, 25),
                                                                   MaxYCells = r.Next(3, 25),
-                                                                  BoxSize = r.Next(3, 25) * r.Next(3, 6),
-                                                                  VerticalLine = index % 3 == 1,,
-                                                                  OrizzontalLine = index % 5 == 1,
+                                                                  BoxSize = r.Next(10, 25) * r.Next(3, 6),
+                                                                  VerticalLine = true,
+                                                                  OrizzontalLine =  true ,
                                                                   Palette =  (await p).ToArray()
                                                                 }
                                                             )).ToList();
