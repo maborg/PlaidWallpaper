@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 
 namespace it.to.maborg
@@ -14,51 +13,54 @@ namespace it.to.maborg
     {
       var r = new Random();
 
-      var palette = new[] {
-        _palette.DownloadPaletteAsync(r, 0xaB000000), 
-        _palette.DownloadPaletteAsync(r, 0xaA000000),
-        _palette.DownloadPaletteAsync(r, 0xa3000000),
-        _palette.DownloadPaletteAsync(r, 0xa1000000),
-        _palette.DownloadPaletteAsync(r, 0xa2000000),
-        _palette.DownloadPaletteAsync(r, 0xa3000000),
-        _palette.DownloadPaletteAsync(r, 0xa4000000),
-        _palette.DownloadPaletteAsync(r, 0xa5000000),
-        _palette.DownloadPaletteAsync(r, 0xa6000000),
-        _palette.DownloadPaletteAsync(r, 0xaB000000), 
-        _palette.DownloadPaletteAsync(r, 0xaA000000),
-        _palette.DownloadPaletteAsync(r, 0xa3000000),
-        _palette.DownloadPaletteAsync(r, 0xa1000000),
-        _palette.DownloadPaletteAsync(r, 0xa2000000),
-        _palette.DownloadPaletteAsync(r, 0xa3000000),
-        _palette.DownloadPaletteAsync(r, 0xa4000000),
-        _palette.DownloadPaletteAsync(r, 0xa5000000),
-        _palette.DownloadPaletteAsync(r, 0xa6000000),      
+      var palette = new[]
+      {
+        _palette.DownloadPaletteAsync(r, 0xAA000000),
+        _palette.DownloadPaletteAsync(r, 0xFF000000),
+        _palette.DownloadPaletteAsync(r, 0xBB000000),
+        _palette.DownloadPaletteAsync(r, 0xFF000000),
+        _palette.DownloadPaletteAsync(r, 0xBB000000),
+        _palette.DownloadPaletteAsync(r, 0xBB000000),
+        _palette.DownloadPaletteAsync(r, 0xBB000000),
+        _palette.DownloadPaletteAsync(r, 0xBB000000),
+        _palette.DownloadPaletteAsync(r, 0xBB000000),
+        _palette.DownloadPaletteAsync(r, 0xBB000000),
+        _palette.DownloadPaletteAsync(r, 0xBB000000),
+        _palette.DownloadPaletteAsync(r, 0xBB000000),
+        _palette.DownloadPaletteAsync(r, 0xBB000000),
       };
 
-    
+      int j = 0;
+      int numloops = 5;
 
-      var ImgByteList = palette.Select(async (p,index) => 
-        PlaidGrid.CreateGridImage(
-          new PlaidGrid.GridInfo()
-            { MaxXCells = 5*16,
-              MaxYCells = 5*9,
-              BoxSize = r.Next(20, 30),
-              VerticalLine = true,
-              OrizzontalLine =index % 2 == 1 ,
-              Palette = (await p).ToArray()
-            })).ToList();
-
-      int i = 0;
-
-      foreach (Task<byte[]> taskbyte in ImgByteList)
+      do
       {
-        FileStream file = new FileStream(string.Format("C:\\Users\\marco.borgna\\Pictures\\wallpaper\\PlaidWallpaper\\paletteWallpaper_{0}.jpg", (++i)), FileMode.Create, FileAccess.Write);
-        byte[] bytes=await taskbyte;
-        file.Write(bytes, 0, bytes.Length);
-      }
+        var imgByteList = palette.Select(async (p, index) => PlaidGrid.CreateGridImage(
+                                                              new PlaidGrid.GridInfo()
+                                                                {
+                                                                  MaxXCells = r.Next(3, 25),
+                                                                  MaxYCells = r.Next(3, 25),
+                                                                  BoxSize = r.Next(3, 25) * r.Next(3, 6),
+                                                                  VerticalLine = index % 3 == 1,,
+                                                                  OrizzontalLine = index % 5 == 1,
+                                                                  Palette =  (await p).ToArray()
+                                                                }
+                                                            )).ToList();
 
+        int i = 0;
 
+        foreach (Task<byte[]> taskbyte in imgByteList)
+        {
+          string filename = string.Format(@"{0}\wallpaper\plaidwallpaper\paletteWallpaper_{2}_{1}.jpg", 
+            Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures), (++i), j);
+          FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write);
+          byte[] bytes = await taskbyte;
+          file.Write(bytes, 0, bytes.Length);
+        }
+        j++;
+      } while (j<numloops);
       return true;
     }
+
   }
 }

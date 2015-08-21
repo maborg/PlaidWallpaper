@@ -45,7 +45,7 @@
     <Compile Include="Palette.cs" />
     <Compile Include="PlaidGrid.cs" />
     <Compile Include="PlaidWallpaper.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
