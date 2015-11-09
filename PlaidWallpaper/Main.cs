@@ -4,8 +4,14 @@
   {
     static void Main(string[] args)
     {
-      var a= new PlaidWallpaper().DoThePlaid();
-      a.Wait();
+        var plaidWallpaper = new PlaidWallpaper
+        {
+            PaletteDownloader = new PaletteDownloader()
+        };
+
+        var a = plaidWallpaper.DoThePlaid();
+
+      
     }
   }
 }
