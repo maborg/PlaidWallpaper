@@ -4,13 +4,13 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 
-namespace it.to.maborg
+namespace PlaidWallpaper
 {
-  class PlaidGrid
+  public class PlaidGrid
   {
-    public static byte[] CreateGridImage(GridInfo gridInfo, IEnumerable<Color> paletteIE)
+    public static byte[] CreateGridImage(GridInfo gridInfo, IEnumerable<Color> paletteIe)
     {
-        var palette = paletteIE.ToArray();
+        var palette = paletteIe.ToArray();
       using (var bmp = new Bitmap(gridInfo.MaxXCells * gridInfo.BoxSize + 1, gridInfo.MaxYCells * gridInfo.BoxSize + 1))
       {
         using (Graphics g = Graphics.FromImage(bmp))
@@ -30,7 +30,7 @@ namespace it.to.maborg
             g.DrawLine(pen, (i * gridInfo.BoxSize), 0, i * gridInfo.BoxSize, gridInfo.BoxSize * gridInfo.MaxYCells + 1);
           }
 
-          if (gridInfo.OrizzontalLine)
+          if (gridInfo.HorizontalLine)
           //Draw oriz lines            
           for (int i = 0; i <= gridInfo.MaxYCells; i++)
           {
@@ -45,13 +45,13 @@ namespace it.to.maborg
       }
     }
 
-    internal class GridInfo
+    public class GridInfo
     {
       public GridInfo()
       {
       }
       public bool VerticalLine     { get;  set; }
-      public bool OrizzontalLine { get;  set; }
+      public bool HorizontalLine { get;  set; }
       public int BoxSize { get; set; }
       public int MaxXCells { get; set; }
       public int MaxYCells { get; set; }
@@ -60,13 +60,13 @@ namespace it.to.maborg
 
     public static byte[] CreateGridImage(IEnumerable<Color> palette)
       {
-          var gridInfo = new PlaidGrid.GridInfo() //todo add random grindinfo type
+          var gridInfo = new GridInfo() //todo add random grindinfo type
           {
-              MaxXCells = 5,
+              MaxXCells = 16,
               MaxYCells = 5,
               BoxSize = 20,
               VerticalLine = true,
-              OrizzontalLine = true
+              HorizontalLine = true
           };
         return CreateGridImage(gridInfo, palette);
       }

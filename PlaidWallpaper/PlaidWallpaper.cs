@@ -1,55 +1,35 @@
-using System;
-using System.IO;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace it.to.maborg
+namespace PlaidWallpaper
 {
-  class PlaidWallpaper
+  public class PlaidWallpaper
   {
-    private readonly PaletteDownloader _palette = new PaletteDownloader();
+    private readonly PaletteDownloader _paletteDownloader = new PaletteDownloader();
 
-    public async Task<bool> DoThePlaid()
+    private readonly uint _transparency = 0xAA000000;
+
+    public void DoThePlaid(PlaidGrid.GridInfo gridInfo, uint numOfPalette)
     {
-      var r = new Random();
-
-      var palette = new[]
-      {
-        _palette.DownloadPaletteAsync(r, 0xAA000000),
-
+      IEnumerable<Color>[] listOfPalettes = {
+        _paletteDownloader.DownloadPalette(_transparency, numOfPalette),
       };
 
-      int j = 0;
-      int numloops = 3;
+      var imgByteList = listOfPalettes.Select(palette => PlaidGrid.CreateGridImage(gridInfo, palette)).ToList();
 
-      do
+      int i = 0;
+
+
+      foreach (var bufferByteJpg in imgByteList)
       {
-        var imgByteList = palette.Select(async (p, index) => PlaidGrid.CreateGridImage(
-                                                              new PlaidGrid.GridInfo()
-                                                                {
-                                                                  MaxXCells = r.Next(3, 25),
-                                                                  MaxYCells = r.Next(3, 25),
-                                                                  BoxSize = r.Next(10, 25) * r.Next(3, 6),
-                                                                  VerticalLine = true,
-                                                                  OrizzontalLine =  true ,
-                                                                  Palette =  (await p).ToArray()
-                                                                }
-                                                            )).ToList();
+        string filename = string.Format(@"paletteWallpaper_{0}.jpg", (++i));
+        ImageSaver.SaveImage(filename, bufferByteJpg);
+      }
 
-        int i = 0;
 
-        foreach (Task<byte[]> taskbyte in imgByteList)
-        {
-          string filename = string.Format(@"{0}\wallpaper\plaidwallpaper\paletteWallpaper_{2}_{1}.jpg", 
-            Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures), (++i), j);
-          FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write);
-          byte[] bytes = await taskbyte;
-          file.Write(bytes, 0, bytes.Length);
-        }
-        j++;
-      } while (j<numloops);
-      return true;
+
     }
-
   }
 }
