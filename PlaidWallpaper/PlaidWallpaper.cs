@@ -13,23 +13,44 @@ namespace PlaidWallpaper
 
     public void DoThePlaid(PlaidGrid.GridInfo gridInfo, uint numOfPalette)
     {
-      IEnumerable<Color>[] listOfPalettes = {
-        _paletteDownloader.DownloadPalette(_transparency, numOfPalette),
-      };
+      // long list with all the color palettes in a single list 
+      IEnumerable<Color[]> listOfPalettes =_paletteDownloader.DownloadPalette(_transparency, numOfPalette);
 
-      var imgByteList = listOfPalettes.Select(palette => PlaidGrid.CreateGridImage(gridInfo, palette)).ToList();
-
-      int i = 0;
-
-
-      foreach (var bufferByteJpg in imgByteList)
+      foreach (var singlePalette in listOfPalettes)
       {
-        string filename = string.Format(@"paletteWallpaper_{0}.jpg", (++i));
-        ImageSaver.SaveImage(filename, bufferByteJpg);
+        var imgByteList = listOfPalettes.Select(
+          palette => PlaidGrid.CreateGridImage(gridInfo, palette)).ToList();
+        int i = 0;
+
+
+        foreach (var bufferByteJpg in imgByteList)
+        {
+          string filename = string.Format(@"paletteWallpaper_{0}.jpg", (++i));
+          ImageSaver.SaveImage(filename, bufferByteJpg);
+        }
       }
 
 
 
+
+
+    }
+
+
+  }
+
+  internal static class Helper
+  {
+    /// <summary>
+    /// Break a list of items into chunks of a specific size
+    /// </summary>
+    public static IEnumerable<IEnumerable<T>> Chunk<T>(this IEnumerable<T> source, int chunksize)
+    {
+      while (source.Any())
+      {
+        yield return source.Take(chunksize);
+        source = source.Skip(chunksize);
+      }
     }
   }
 }

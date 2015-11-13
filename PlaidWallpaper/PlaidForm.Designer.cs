@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlaidForm));
       this.cbVerticalLine = new System.Windows.Forms.CheckBox();
       this.cbHorizontalLine = new System.Windows.Forms.CheckBox();
       this.tbBoxSize = new System.Windows.Forms.TextBox();
@@ -44,6 +45,8 @@
       // cbVerticalLine
       // 
       this.cbVerticalLine.AutoSize = true;
+      this.cbVerticalLine.Checked = true;
+      this.cbVerticalLine.CheckState = System.Windows.Forms.CheckState.Checked;
       this.cbVerticalLine.Location = new System.Drawing.Point(30, 28);
       this.cbVerticalLine.Name = "cbVerticalLine";
       this.cbVerticalLine.Size = new System.Drawing.Size(84, 17);
@@ -54,6 +57,8 @@
       // cbHorizontalLine
       // 
       this.cbHorizontalLine.AutoSize = true;
+      this.cbHorizontalLine.Checked = true;
+      this.cbHorizontalLine.CheckState = System.Windows.Forms.CheckState.Checked;
       this.cbHorizontalLine.Location = new System.Drawing.Point(167, 28);
       this.cbHorizontalLine.Name = "cbHorizontalLine";
       this.cbHorizontalLine.Size = new System.Drawing.Size(96, 17);
@@ -159,6 +164,7 @@
       this.Controls.Add(this.tbBoxSize);
       this.Controls.Add(this.cbHorizontalLine);
       this.Controls.Add(this.cbVerticalLine);
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Name = "PlaidForm";
       this.Text = "Form1";
       this.ResumeLayout(false);

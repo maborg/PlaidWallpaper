@@ -37,11 +37,6 @@ namespace PlaidWallpaperWinForm
         MessageBox.Show("One field seem to be wrong. :( ");
 
       }
-
-
-
     }
-
-
   }
 }
