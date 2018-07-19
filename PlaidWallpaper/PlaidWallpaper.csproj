@@ -61,6 +61,7 @@
     <Compile Include="PlaidForm.Designer.cs">
       <DependentUpon>PlaidForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PlaidGridRandom.cs" />
     <Compile Include="PlaidGrid.cs" />
     <Compile Include="PlaidWallpaper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -29,7 +29,7 @@ namespace PlaidWallpaperWinForm
                       };
 
         var plaidWallpaper = new PlaidWallpaper.PlaidWallpaper();
-        plaidWallpaper.DoThePlaid(gridInfo, uint.Parse(tbWallpaperNumber.Text));
+        plaidWallpaper.DoThePlaid(gridInfo, uint.Parse(tbWallpaperNumber.Text),tbKeyword.Text);
 
       }
       catch (FormatException)
