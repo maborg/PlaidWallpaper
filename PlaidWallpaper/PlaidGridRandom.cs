@@ -18,13 +18,14 @@ namespace PlaidWallpaper
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                g.Clear(Color.White);
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
                 Pen pen = new Pen(palette.First())
                 {
                     Color = palette.First(),
                     Width = gridInfo.BoxSize
                 };
-
+                g.Clear(palette[0]);
                 if (gridInfo.VerticalLine)
                     //Draw vert lines
                     for (int i = 0; i <= gridInfo.MaxXCells; i++)
@@ -32,7 +33,6 @@ namespace PlaidWallpaper
                         pen.Color = palette[i % (palette.Length)];
                         g.DrawLine(pen, (i * gridInfo.BoxSize) + rand.Next(-gridInfo.BoxSize, gridInfo.BoxSize), 0, i * gridInfo.BoxSize, gridInfo.BoxSize * gridInfo.MaxYCells + 1);
                     }
-
                 if (gridInfo.HorizontalLine)
                     //Draw oriz lines            
                     for (int i = 0; i <= gridInfo.MaxYCells; i++)
@@ -40,6 +40,24 @@ namespace PlaidWallpaper
                         pen.Color = palette[i % (palette.Length)];
                         g.DrawLine(pen, 0, (i * gridInfo.BoxSize) + rand.Next(-gridInfo.BoxSize, gridInfo.BoxSize), gridInfo.BoxSize * gridInfo.MaxXCells + 1, i * gridInfo.BoxSize);
                     }
+
+                if (gridInfo.VerticalLine)
+                    //Draw vert lines
+                    for (int i = gridInfo.MaxXCells-1; i >=0 ; i--)
+                    {
+                        pen.Color = palette[i % (palette.Length)];
+                        g.DrawLine(pen, (i * gridInfo.BoxSize) + rand.Next(-gridInfo.BoxSize, gridInfo.BoxSize), 0, i * gridInfo.BoxSize, gridInfo.BoxSize * gridInfo.MaxYCells + 1);
+                    }
+
+                if (gridInfo.HorizontalLine)
+                    //Draw oriz lines            
+                    for (int i = gridInfo.MaxYCells-1; i >=0 ; i--)
+                    {
+                        pen.Color = palette[i % (palette.Length)];
+                        g.DrawLine(pen, 0, (i * gridInfo.BoxSize) + rand.Next(-gridInfo.BoxSize, gridInfo.BoxSize), gridInfo.BoxSize * gridInfo.MaxXCells + 1, i * gridInfo.BoxSize);
+                    }
+
+
                 return bmp;
             }
 
