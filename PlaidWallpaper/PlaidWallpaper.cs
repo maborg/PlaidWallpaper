@@ -18,24 +18,26 @@ namespace PlaidWallpaper
 
             // long list with all the color palettes in a single list 
             IEnumerable<Color[]> listOfPalettes = _paletteDownloader.DownloadPalette(_transparency, numOfPalette, keywords);
-           
-            if (listOfPalettes.Count() ==0)
-                System.Windows.Forms.MessageBox.Show("No palette avaliables for " + keywords);
 
-            var imgByteList = listOfPalettes.Select(
-                palette => PlaidGridRandom.CreateGridImage(gridInfo, palette)
-              ).ToList();
-            int i = 0;
-            foreach (var bmp in imgByteList)
+            if (listOfPalettes.Count() == 0)
             {
-                string filename = string.Format(@"paletteWallpaper_{0}.png", (++i));
-                
-                var memStream = new MemoryStream();
-                bmp.Save(memStream, ImageFormat.Png);
-             
-                ImageSaver.SaveImage(filename, memStream.ToArray());
+                System.Windows.Forms.MessageBox.Show("No palette avaliables for " + keywords);
             }
+            else {
+                int i = 0;
+                listOfPalettes.Select(
+                   palette => PlaidGridRandom.CreateGridImage(gridInfo, palette)
+                 ).Select(b => {
 
+                     string filename = string.Format(@"paletteWallpaper_{0}.png", (++i));
+                     var memStream = new MemoryStream();
+                     b.Save(memStream, ImageFormat.Png);
+                     ImageSaver.SaveImage(filename, memStream.ToArray());
+
+                     memStream = null;
+                     return true;
+                 }).ToList();
+            }
         }
     }
 

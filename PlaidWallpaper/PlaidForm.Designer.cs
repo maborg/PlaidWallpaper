@@ -74,7 +74,7 @@
             this.tbBoxSize.Name = "tbBoxSize";
             this.tbBoxSize.Size = new System.Drawing.Size(100, 20);
             this.tbBoxSize.TabIndex = 2;
-            this.tbBoxSize.Text = "25";
+            this.tbBoxSize.Text = "200";
             this.tbBoxSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
@@ -92,7 +92,7 @@
             this.tbMaxXCells.Name = "tbMaxXCells";
             this.tbMaxXCells.Size = new System.Drawing.Size(100, 20);
             this.tbMaxXCells.TabIndex = 4;
-            this.tbMaxXCells.Text = "5";
+            this.tbMaxXCells.Text = "16";
             this.tbMaxXCells.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // labelMaxXCells
@@ -110,7 +110,7 @@
             this.tbMaxYCells.Name = "tbMaxYCells";
             this.tbMaxYCells.Size = new System.Drawing.Size(100, 20);
             this.tbMaxYCells.TabIndex = 6;
-            this.tbMaxYCells.Text = "11";
+            this.tbMaxYCells.Text = "9";
             this.tbMaxYCells.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // labelMaxYCells
@@ -138,7 +138,7 @@
             this.tbWallpaperNumber.Name = "tbWallpaperNumber";
             this.tbWallpaperNumber.Size = new System.Drawing.Size(100, 20);
             this.tbWallpaperNumber.TabIndex = 9;
-            this.tbWallpaperNumber.Text = "25";
+            this.tbWallpaperNumber.Text = "16";
             this.tbWallpaperNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // labelWallpaperNumber
@@ -165,7 +165,7 @@
             this.tbKeyword.Name = "tbKeyword";
             this.tbKeyword.Size = new System.Drawing.Size(100, 20);
             this.tbKeyword.TabIndex = 9;
-            this.tbKeyword.Text = "bitcoin";
+            this.tbKeyword.Text = "hot";
             this.tbKeyword.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // PlaidForm

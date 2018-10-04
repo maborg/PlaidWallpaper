@@ -38,14 +38,14 @@ namespace PlaidWallpaper
                     for (int i = 0; i <= gridInfo.MaxYCells; i++)
                     {
                         pen.Color = palette[i % (palette.Length)];
-                        g.DrawLine(pen, 0, (i * gridInfo.BoxSize) + rand.Next(-gridInfo.BoxSize, gridInfo.BoxSize), gridInfo.BoxSize * gridInfo.MaxXCells + 1, i * gridInfo.BoxSize);
+                        g.DrawLine(pen, -gridInfo.BoxSize/2, (i * gridInfo.BoxSize) + rand.Next(-gridInfo.BoxSize, gridInfo.BoxSize), gridInfo.BoxSize * gridInfo.MaxXCells + 1, i * gridInfo.BoxSize);
                     }
 
                 if (gridInfo.VerticalLine)
                     //Draw vert lines
                     for (int i = gridInfo.MaxXCells-1; i >=0 ; i--)
                     {
-                        pen.Color = palette[i % (palette.Length)];
+                        pen.Color = palette[palette.Length - i % (palette.Length) -1 ];
                         g.DrawLine(pen, (i * gridInfo.BoxSize) + rand.Next(-gridInfo.BoxSize, gridInfo.BoxSize), 0, i * gridInfo.BoxSize, gridInfo.BoxSize * gridInfo.MaxYCells + 1);
                     }
 
@@ -53,8 +53,8 @@ namespace PlaidWallpaper
                     //Draw oriz lines            
                     for (int i = gridInfo.MaxYCells-1; i >=0 ; i--)
                     {
-                        pen.Color = palette[i % (palette.Length)];
-                        g.DrawLine(pen, 0, (i * gridInfo.BoxSize) + rand.Next(-gridInfo.BoxSize, gridInfo.BoxSize), gridInfo.BoxSize * gridInfo.MaxXCells + 1, i * gridInfo.BoxSize);
+                        pen.Color = palette[palette.Length -i % (palette.Length) -1];
+                        g.DrawLine(pen, -gridInfo.BoxSize / 2, (i * gridInfo.BoxSize) + rand.Next(-gridInfo.BoxSize, gridInfo.BoxSize), gridInfo.BoxSize * gridInfo.MaxXCells + 1, i * gridInfo.BoxSize);
                     }
 
 
